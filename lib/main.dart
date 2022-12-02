@@ -30,7 +30,12 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(
+              width: deviceWidth / 2,
+              height: 128,
+            ),
             SizedBox(
               width: deviceWidth / 2,
               height: deviceWidth / 2,
@@ -38,6 +43,7 @@ class MyHomePage extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   alignment: Alignment.center,
@@ -55,6 +61,30 @@ class MyHomePage extends StatelessWidget {
                   child: Text(
                     '** ℃',
                     style: labelLarge.copyWith(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: deviceWidth / 2,
+              height: 80,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: deviceWidth / 4,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text('Close'),
+                  ),
+                ),
+                SizedBox(
+                  width: deviceWidth / 4,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text('Reload'),
                   ),
                 ),
               ],
