@@ -24,6 +24,15 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    final deviceWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: Center(
+        child: SizedBox(
+          width: deviceWidth / 2,
+          height: deviceWidth / 2,
+          child: const Placeholder(),
+        ),
+      ),
+    );
   }
 }
