@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:yumemi_weather/yumemi_weather.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -26,6 +28,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final labelLarge = Theme.of(context).textTheme.labelLarge!;
+    final yumemiWeather = YumemiWeather();
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -83,7 +87,11 @@ class MyHomePage extends StatelessWidget {
                 SizedBox(
                   width: deviceWidth / 4,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final weatherCondition =
+                          yumemiWeather.fetchSimpleWeather();
+                      debugPrint('Weather Condition: $weatherCondition');
+                    },
                     child: const Text('Reload'),
                   ),
                 ),
