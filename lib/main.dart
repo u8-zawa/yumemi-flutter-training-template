@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:yumemi_weather/yumemi_weather.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -19,13 +22,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String weatherCondition = '';
 
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final labelLarge = Theme.of(context).textTheme.labelLarge!;
+    final yumemiWeather = YumemiWeather();
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -39,7 +51,12 @@ class MyHomePage extends StatelessWidget {
             SizedBox(
               width: deviceWidth / 2,
               height: deviceWidth / 2,
-              child: const Placeholder(),
+              child: weatherCondition.isNotEmpty
+                  ? SvgPicture.asset(
+                      'assets/$weatherCondition.svg',
+                      semanticsLabel: 'weater',
+                    )
+                  : const Placeholder(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +100,12 @@ class MyHomePage extends StatelessWidget {
                 SizedBox(
                   width: deviceWidth / 4,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        weatherCondition = yumemiWeather.fetchSimpleWeather();
+                      });
+                      debugPrint('Weather Condition: $weatherCondition');
+                    },
                     child: const Text('Reload'),
                   ),
                 ),
